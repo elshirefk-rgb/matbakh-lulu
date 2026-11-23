@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#C2452D">
+<title>مطبخ لولو</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=El+Messiri:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBF4E8;--card:#FFFDF8;--ink:#3B2A20;--muted:#806A58;--line:#EBDCC8;--tomato:#C2452D;--tomato-d:#A23722;--olive:#56733A;--olive-l:#E7EFD8;--saffron:#E7A23B;--apricot:#FCE4CB;--shadow:0 8px 24px rgba(120,64,24,.10);--r:22px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background-color:var(--bg);background-image:radial-gradient(#ead9c2 1px,transparent 1.3px);background-size:22px 22px;color:var(--ink);font:17px/1.6 'Cairo',Tahoma,sans-serif;min-height:100vh}
+h1,h2,h3{font-family:'El Messiri','Cairo',serif;margin:0;line-height:1.3}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+button:disabled{opacity:.55}
+:focus-visible{outline:3px solid var(--saffron);outline-offset:2px}
+.muted{color:var(--muted)}.center{text-align:center}
+
+/* الهيدر */
+.top{background:linear-gradient(135deg,#C2452D,#D5602F 55%,#E7A23B);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 16px 12px;border-radius:0 0 24px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.top::before,.top::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
+.top::before{width:190px;height:190px;left:-60px;bottom:-90px}.top::after{width:90px;height:90px;left:70px;top:-40px}
+.top-in{max-width:560px;margin:auto;position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;border-radius:13px;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:23px}
+.top h1{font-size:23px}
+.top .sub{font-size:13.5px;opacity:.85;margin:0}
+.icon-btn{margin-inline-start:auto;width:40px;height:40px;border-radius:13px;background:rgba(255,255,255,.2);font-size:21px;color:#fff}
+.gift{margin:8px 0 0;font-size:14px;line-height:1.6;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:13px;text-align:center}
+
+main{max-width:560px;margin:auto;padding:12px 16px calc(140px + env(safe-area-inset-bottom))}
+.tab{display:none}.tab.on{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+
+/* الرئيسية */
+.hello h2{font-size:25px}.hello p{margin:0 0 12px;color:var(--muted);font-size:15px}
+.bubble{display:flex;gap:10px;align-items:flex-start;margin:4px 0 14px}
+.bubble .av{flex:none;width:40px;height:40px;border-radius:50%;background:var(--apricot);display:grid;place-items:center;font-size:21px}
+.bubble .tx{background:var(--card);border:1px solid var(--line);border-radius:18px 4px 18px 18px;padding:10px 14px;box-shadow:var(--shadow);white-space:pre-line;overflow-wrap:anywhere;font-size:16px}
+.undo-l{display:block;margin-top:6px;color:var(--tomato);font-weight:800;font-size:14.5px}
+.yday{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:0 0 10px;box-shadow:var(--shadow)}
+.yday b{font-size:16px}
+.install{display:flex;align-items:center;gap:10px;background:var(--olive-l);border-radius:18px;padding:10px 14px;margin:0 0 12px;font-weight:700;font-size:15px}
+.install button{margin-inline-start:auto;background:var(--olive);color:#fff;border-radius:99px;padding:6px 14px;font-weight:800}
+
+.meal{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;box-shadow:var(--shadow);width:100%;text-align:start;margin:10px 0}
+.plate{flex:none;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle,#fff 50%,#f4e9d9 53%,#fff 63%,#e9d8c1 100%);display:grid;place-items:center;font-size:32px;box-shadow:inset 0 -3px 6px rgba(0,0,0,.06),0 4px 10px rgba(120,64,24,.13)}
+.meal .info{flex:1;min-width:0}
+.day{color:var(--muted);font-size:14px;font-weight:800}
+.meal h3{font-size:20px;margin:1px 0 6px}
+.badge{display:inline-block;font-size:13.5px;font-weight:800;padding:3px 11px;border-radius:99px;line-height:1.6}
+.b-ok{background:var(--olive-l);color:var(--olive)}.b-miss{background:var(--apricot);color:#9a4a14}.b-done{background:#ece5da;color:#6b5a4a}
+.meal.big{flex-wrap:wrap;background:linear-gradient(165deg,#fff 0%,#fff 50%,var(--olive-l) 100%);border:2px solid #cfdcb9;padding:18px}
+.meal.big .plate{width:96px;height:96px;font-size:50px}
+.meal.big h3{font-size:26px}
+.meal.big .info{cursor:pointer}
+.meal.tmw{background:linear-gradient(165deg,#fff,#fff 55%,var(--apricot));border-color:#f2d0b0}
+.meal.done{opacity:.85}
+.acts{display:flex;gap:8px;width:100%;margin-top:8px}
+.acts button{flex:1;min-height:48px;border-radius:15px;font-weight:800;font-size:15px;background:#fff;border:1px solid var(--line)}
+.acts .pri{background:var(--olive);color:#fff;border-color:var(--olive)}
+.acts .x{flex:0 0 48px}
+.row-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0 6px}
+.row-head h2{font-size:24px}.row-head h3{font-size:19px}
+.link{color:var(--tomato);font-weight:800;font-size:15px;padding:8px 4px}
+.strip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:4px 16px 12px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.mini{flex:none;width:130px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:12px 10px;text-align:center;box-shadow:var(--shadow)}
+.mini .plate{width:54px;height:54px;font-size:27px;margin:6px auto 8px}
+.mini b{display:block;font-size:15px;line-height:1.35;min-height:41px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--olive);margin-top:6px}.dot.m{background:var(--saffron)}.dot.d{background:#bdb2a4}
+.ask{display:flex;gap:8px;margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px;box-shadow:var(--shadow)}
+.ask input{flex:1;border:0;background:none;padding:8px 14px;min-width:0;outline:none}
+.ask button{flex:none;width:48px;height:48px;border-radius:50%;background:var(--tomato);color:#fff;display:grid;place-items:center}
+.ask svg{width:22px;height:22px;transform:scaleX(-1)}
+.welcome{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px 18px;box-shadow:var(--shadow);text-align:center}
+.welcome .em{font-size:54px;display:block;line-height:1.2}
+.welcome b{display:block;font-family:'El Messiri','Cairo',serif;font-size:22px;margin:4px 0}
+.welcome p{margin:4px 0}
+.welcome q{display:block;background:var(--apricot);border-radius:14px;padding:10px 12px;margin:10px 0 4px;quotes:'«' '»';font-weight:700}
+.skel{height:170px;border-radius:var(--r);margin:10px 0;background:linear-gradient(90deg,#f1e5d3 25%,#fbf4e8 50%,#f1e5d3 75%);background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+
+/* الأزرار العامة */
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:54px;border-radius:17px;font-weight:800;font-size:17px;margin-top:10px}
+.btn.pri{background:var(--tomato);color:#fff}.btn.ok{background:var(--olive);color:#fff}.btn.ghost{background:#fff;border:1px solid var(--line)}
+.btn.danger{background:#fff;color:#a2321f;border:1px solid #efc6bb}.btn.wa{background:#1FA855;color:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pill{background:var(--tomato);color:#fff;border-radius:99px;padding:8px 18px;font-weight:800;min-height:46px}
+
+/* المخزون */
+.search{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:10px 18px;min-height:50px;margin:6px 0 12px;outline:none}
+.search:focus{border-color:var(--saffron)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;gap:10px;align-items:center;text-align:start;box-shadow:var(--shadow);min-height:76px}
+.tile .em{font-size:27px;width:46px;height:46px;border-radius:14px;background:#f7ecdd;display:grid;place-items:center;flex:none}
+.tile b{display:block;font-size:16px;line-height:1.3}
+.tile small{color:var(--muted);font-weight:800;font-size:14px}
+.tile.low{border-color:#f0b98a;background:linear-gradient(#fff,#fff4ea)}
+.flag{display:block;color:#b45a1c;font-size:12px;font-weight:800}
+.empty{text-align:center;padding:30px 18px;background:var(--card);border:2px dashed var(--line);border-radius:var(--r);color:var(--muted);grid-column:1/-1}
+.empty .big{font-size:50px;display:block}
+.empty b{color:var(--ink);font-size:20px;display:block;margin:6px 0;font-family:'El Messiri','Cairo',serif}
+
+/* النواقص */
+.seg{display:flex;background:#efe3d2;border-radius:99px;padding:4px;margin:10px 0 12px}
+.seg button{flex:1;min-height:46px;border-radius:99px;font-weight:800;color:var(--muted)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.check{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:17px;padding:12px 14px;margin:8px 0;cursor:pointer}
+.check input{width:24px;height:24px;accent-color:var(--olive);flex:none}
+.check .em{font-size:25px}.check b{flex:1}.check small{color:var(--muted);font-weight:800}
+.check.off{opacity:.45}
+
+/* الفورم */
+.field{display:block;margin:12px 0 0;font-weight:800;font-size:15px}
+.field input,.field textarea{display:block;width:100%;margin-top:5px;border:1.5px solid var(--line);background:#fff;border-radius:15px;padding:12px 14px;font-weight:400;font-size:17px;min-height:52px;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--saffron)}
+.stepper{display:flex;gap:8px;margin-top:5px}
+.stepper button{width:54px;height:54px;border-radius:15px;background:#fff;border:1px solid var(--line);font-size:24px;font-weight:800;flex:none}
+.stepper input{flex:1;min-width:0;text-align:center;border:1.5px solid var(--line);border-radius:15px;background:#fff;font-size:20px;font-weight:800;outline:none}
+.uchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.uchips button{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-weight:700;font-size:15px}
+.uchips button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* الشيت */
+dialog.sheet{border:0;padding:0;width:100%;max-width:560px;margin:auto auto 0;border-radius:28px 28px 0 0;background:var(--bg);color:var(--ink);max-height:90vh;overflow:auto;overscroll-behavior:contain}
+dialog.sheet[open]{animation:up .25s}
+dialog.sheet::backdrop{background:rgba(40,25,15,.55)}
+.sheet-in{padding:6px 18px calc(24px + env(safe-area-inset-bottom))}
+.grab{width:46px;height:5px;border-radius:9px;background:#d8c7b0;margin:8px auto 14px}
+.sheet h2{font-size:23px;margin-bottom:4px;outline:none}
+.sheet h3{font-size:19px;margin:16px 0 4px}
+.rcp-head{display:flex;gap:14px;align-items:center;margin-bottom:6px}
+.rcp-head .plate{width:78px;height:78px;font-size:40px}
+.ing{list-style:none;padding:0;margin:4px 0}
+.ing li{padding:8px 2px;border-bottom:1px dashed var(--line)}
+.steps{list-style:none;padding:0;margin:4px 0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:10px 46px 10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.steps li::before{content:counter(s,arabic-indic);position:absolute;right:0;top:10px;width:34px;height:34px;border-radius:50%;background:var(--apricot);color:var(--tomato-d);font-weight:800;display:grid;place-items:center}
+.steps li.done{opacity:.45;text-decoration:line-through}
+.steps li.done::before{content:'✓';background:var(--olive-l);color:var(--olive)}
+.needbox{background:var(--apricot);border-radius:16px;padding:10px 14px;margin:10px 0;font-size:15.5px}
+
+/* الشريط السفلي */
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(255,253,248,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 6px calc(8px + env(safe-area-inset-bottom))}
+.nav-in{max-width:560px;margin:auto;display:grid;grid-template-columns:1fr 1fr 96px 1fr 1fr;align-items:end}
+.nav-in>button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:12.5px;font-weight:800;color:var(--muted);min-height:56px;border-radius:14px}
+.nav-in>button span{font-size:23px;line-height:1;filter:grayscale(.7);opacity:.75}
+.nav-in>button.on{color:var(--tomato)}.nav-in>button.on span{filter:none;opacity:1}
+.nav-in>button.mic{justify-self:center;width:78px;height:78px;margin-top:-36px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E26442,var(--tomato) 55%,var(--tomato-d));color:#fff;box-shadow:0 10px 24px rgba(194,69,45,.45),0 0 0 6px var(--bg);position:relative}
+.mic svg{width:34px;height:34px}
+.mic.hint::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:3px solid var(--tomato);animation:ring 1.8s infinite}
+
+/* التسجيل */
+.rec{position:fixed;inset:0;z-index:40;background:rgba(40,25,15,.6);display:flex;align-items:flex-end;justify-content:center}
+.rec[hidden]{display:none}
+.rec-card{width:100%;max-width:560px;background:var(--bg);border-radius:30px 30px 0 0;padding:24px 20px calc(22px + env(safe-area-inset-bottom));text-align:center;animation:up .25s}
+.rec-dot{width:98px;height:98px;margin:4px auto 10px;border-radius:50%;background:var(--tomato);display:grid;place-items:center;color:#fff;position:relative}
+.rec-dot svg{width:42px;height:42px}
+.rec-dot::before,.rec-dot::after{content:'';position:absolute;inset:0;border-radius:50%;border:3px solid var(--tomato);animation:ring 1.6s infinite}
+.rec-dot::after{animation-delay:.8s}
+@keyframes ring{to{transform:scale(1.6);opacity:0}}
+.time{font-size:30px;font-weight:800;direction:ltr;font-variant-numeric:tabular-nums}
+.bars{display:flex;gap:4px;justify-content:center;align-items:center;height:52px;margin:6px 0}
+.bars i{width:5px;border-radius:3px;background:var(--saffron);height:6px;transition:height .1s}
+.rec .hint{color:var(--muted);font-size:15px;margin:2px 0 18px}
+.rec-acts{display:flex;gap:10px}.rec-acts button{flex:1;min-height:58px;border-radius:18px;font-weight:800;font-size:17px}
+.rec-acts .go{flex:2;background:var(--olive);color:#fff}.rec-acts .no{background:#fff;border:1px solid var(--line)}
+
+/* التوست والتفكير */
+.toast{position:fixed;left:12px;right:12px;bottom:calc(106px + env(safe-area-inset-bottom));z-index:30;max-width:536px;margin:auto;background:var(--ink);color:#fff;border-radius:20px;padding:14px 16px 8px;box-shadow:0 12px 30px rgba(0,0,0,.25);animation:up .25s;max-height:55vh;overflow:auto}
+.toast[hidden]{display:none}
+.toast.err{background:#7a2416}
+.t-title{font-weight:700;white-space:pre-line;overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px}
+.chip{background:rgba(255,255,255,.15);border-radius:99px;padding:3px 11px;font-size:14px;font-weight:800}
+.chip.p{background:#5d7a3e}.chip.m{background:#9b3b25}
+.light .chip{background:#efe3d2;color:var(--ink)}.light .chip.p{background:var(--olive-l);color:var(--olive)}.light .chip.m{background:#f8d9d0;color:#9b3b25}
+.note{font-size:14px;opacity:.92;margin:6px 0 0}
+.t-acts{display:flex;gap:6px;justify-content:flex-end;margin-top:6px}
+.t-acts button{color:#FFD18A;font-weight:800;padding:8px 10px;min-height:40px}
+.thinking{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(108px + env(safe-area-inset-bottom));z-index:35;background:var(--ink);color:#fff;border-radius:99px;padding:9px 20px 9px 16px;display:flex;gap:12px;align-items:center;font-weight:800;box-shadow:0 10px 26px rgba(0,0,0,.25);white-space:nowrap}
+.thinking[hidden]{display:none}
+.pot{position:relative;font-size:25px;display:inline-block;animation:simmer .8s ease-in-out infinite alternate}
+.pot i{position:absolute;top:-9px;width:4px;height:10px;border-radius:4px;background:rgba(255,255,255,.75);animation:steam 1.4s infinite}
+.pot i:nth-child(1){left:5px}.pot i:nth-child(2){left:12px;animation-delay:.45s}.pot i:nth-child(3){left:19px;animation-delay:.9s}
+@keyframes simmer{to{transform:translateY(-2px) rotate(-5deg)}}
+@keyframes steam{0%{opacity:0;transform:translateY(4px)}50%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">🍲</span>
+    <h1>مطبخ لولو</h1>
+    <button class="icon-btn" data-act="settings" aria-label="الإعدادات">⚙️</button>
+  </div>
+  <p class="gift">في عيد جوازنا عملتلك مطبخ لولو ❤️ بحبك يا لولو 🌷</p>
+</div></header>
+
+<main>
+  <section id="tab-home" class="tab on">
+    <div class="hello"><h2 id="greet"></h2><p id="dateLine"></p></div>
+    <div id="installBox"></div>
+    <div id="bubble"></div>
+    <div id="yday"></div>
+    <div id="todayBox"></div>
+    <div id="tomorrowBox"></div>
+    <div id="weekWrap">
+      <div class="row-head"><h3>الأيام الجاية</h3><button class="link" data-act="replan">↻ خطة جديدة</button></div>
+      <div id="weekStrip" class="strip"></div>
+    </div>
+    <form id="askForm" class="ask">
+      <input id="ask" placeholder="أو اكتبي: اشتريت ٢ كيلو طماطم…" autocomplete="off" enterkeyhint="send">
+      <button aria-label="إرسال"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.4 20.4 21 12 3.4 3.6 3.4 10l12.6 2-12.6 2z"/></svg></button>
+    </form>
+  </section>
+
+  <section id="tab-stock" class="tab">
+    <div class="row-head"><div><h2>مخزون البيت</h2><span id="stockCount" class="muted"></span></div><button class="pill" data-act="addItem">＋ صنف</button></div>
+    <input id="stockSearch" class="search" type="search" placeholder="🔎 دوّري على صنف…">
+    <div id="stockGrid" class="grid"></div>
+    <p class="muted center" style="font-size:14.5px;margin-top:16px">أسرع طريقة: دوسي الميكروفون وقولي «اشتريت…» أو «خلص…»</p>
+  </section>
+
+  <section id="tab-shop" class="tab">
+    <div class="row-head"><h2>النواقص</h2></div>
+    <div class="seg"><button data-range="today">النهارده</button><button data-range="all">الأيام الجاية</button></div>
+    <div id="shopList"></div>
+  </section>
+</main>
+
+<nav class="nav"><div class="nav-in">
+  <button data-tab="home" class="on"><span>🏠</span>الرئيسية</button>
+  <button data-tab="stock"><span>🧺</span>المخزون</button>
+  <button id="mic" class="mic" aria-label="سجّلي فويس"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z"/></svg></button>
+  <button data-tab="shop"><span>🛒</span>النواقص</button>
+  <button id="cameraBtn"><span>📷</span>صورة</button>
+</div></nav>
+
+<input id="photoCam" type="file" accept="image/*" capture="environment" hidden><input id="photoLib" type="file" accept="image/*" hidden>
+
+<div id="rec" class="rec" hidden><div class="rec-card">
+  <div class="rec-dot"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z"/></svg></div>
+  <div class="time" id="recTime">0:00</div>
+  <div class="bars" id="bars"></div>
+  <p class="hint" id="recHint"></p>
+  <div class="rec-acts"><button class="no" id="recCancel">إلغاء</button><button class="go" id="recSend">✓ خلصت، ابعتي</button></div>
+</div></div>
+
+<div id="thinking" class="thinking" hidden role="status"><span class="pot">🍲<i></i><i></i><i></i></span><span id="thinkText">بفكّر يا لولو…</span></div>
+<div id="toast" class="toast" hidden role="status"></div>
+<dialog id="sheet" class="sheet"><div class="sheet-in" id="sheetBody"></div></dialog>
+
+<script>
+'use strict';
+/* ============ أدوات صغيرة ============ */
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const stamp=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const addDays=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+n);return stamp(d)};
+const today=()=>stamp(new Date());
+const upcoming=()=>Array.from({length:7},(_,i)=>addDays(today(),i));
+const DAYS=['الأحد','الاتنين','التلات','الأربع','الخميس','الجمعة','السبت'];
+const weekday=s=>DAYS[new Date(s+'T12:00').getDay()];
+const dayLabel=s=>{const t=today();return s===t?'النهارده':s===addDays(t,1)?'بكرة':s===addDays(t,-1)?'امبارح':weekday(s)};
+const num=v=>(+v).toLocaleString('ar-EG',{maximumFractionDigits:2});
+const round=v=>Math.round(v*1000)/1000;
+function qty(q){q=+q;return q<1&&{0.25:'¼',0.5:'½',0.75:'¾'}[Math.round(q*100)/100]||num(q)}
+
+/* توحيد الكتابة: أ/إ/آ، ة/ه، ى/ي، التشكيل، "ال" */
+const norm=s=>String(s??'').trim().replace(/[ً-ْـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/\s+/g,' ');
+const words=s=>norm(s).split(' ').map(w=>w.replace(/^(وال|بال|لل|ال)(?=..)/,'')).filter(Boolean);
+const nk=s=>words(s).join(' ');
+const subset=(a,b)=>a.every(w=>b.includes(w));
+
+/* الوحدات */
+const UNIT={};
+[[['كجم','كيلو','كيلوجرام','كيلوجرامات','كغ'],'جم',1000],[['جم','جرام','جرامات','غرام','غم'],'جم',1],
+ [['لتر','لترات'],'مل',1000],[['مل','ملي','مللي','ملليلتر','ميلي'],'مل',1],
+ [['قطعة','قطع','حبة','حبات','حتة','حتت','عدد','بيضة'],'قطعه',1],[['دستة','دسته'],'قطعه',12],
+ [['كيس','أكياس'],'كيس',1],[['علبة','علب'],'علبه',1],[['كوب','كوباية','أكواب'],'كوب',1],
+ [['ملعقة','معلقة','معالق','ملاعق'],'ملعقه',1],[['إزازة','زجاجة','إزايز'],'ازازه',1],[['رغيف','أرغفة'],'رغيف',1]]
+ .forEach(([ns,b,f])=>ns.forEach(n=>UNIT[norm(n)]=[b,f]));
+const measure=u=>UNIT[norm(u)]||[norm(u),1];
+const compat=(a,b)=>measure(a.unit)[0]===measure(b.unit)[0];
+const conv=(q,from,to)=>q*measure(from)[1]/measure(to)[1];
+const isStaple=n=>/^(ملح|فلفل اسود|بهارات|كمون|مي?ه|مياه|ماء|ميه سخنه)$/.test(nk(n));
+const validIng=g=>g&&typeof g.name==='string'&&g.name.trim()&&typeof g.unit==='string'&&g.unit.trim()&&Number.isFinite(+g.qty)&&+g.qty>0;
+function niceUp(q,unit){const [b,f]=measure(unit);if(b==='جم'&&f===1)return Math.ceil(q/50)*50;if(b==='مل'&&f===1)return Math.ceil(q/50)*50;if(f===1000)return Math.ceil(q*4-1e-9)/4;if(b==='قطعه'&&f===1||b==='كيس'||b==='علبه'||b==='رغيف')return Math.ceil(q-1e-9);return round(q)}
+
+/* أيقونات الأكل */
+const FOOD=[[/فراخ|دجاج|فرخه|صدور|وراك|بانيه|شيش|اجنحه/,'🍗'],[/لحم|كفته|مفروم|كبده|سجق|بفتيك|موزه|ريش|حواوشي/,'🥩'],[/سمك|بلطي|بوري|فيليه|تونه|سردين/,'🐟'],[/جمبري|كاليماري/,'🦐'],[/مكرونه|اسباجتي|بشاميل|معكرونه|لازانيا/,'🍝'],[/رز|ارز/,'🍚'],[/عيش|خبز|توست|رغيف|فينو/,'🍞'],[/بيض|عجه/,'🥚'],[/لبن|حليب|زبادي|رايب/,'🥛'],[/جبن|موتزاريلا|رومي/,'🧀'],[/طماطم|صلصه/,'🍅'],[/بطاطس/,'🥔'],[/بصل/,'🧅'],[/توم|ثوم/,'🧄'],[/جزر/,'🥕'],[/محشي|فلفل/,'🫑'],[/خيار|كوسه/,'🥒'],[/باذنجان|بتنجان|مسقعه/,'🍆'],[/كشري|عدس|فول|فاصوليا|لوبيا|حمص|بسله|بازلاء|طعميه/,'🫘'],[/ملوخيه|سبانخ|خضار|سلطه|خس|بقدونس|كزبره|شبت/,'🥬'],[/شوربه|مرقه|لسان عصفور/,'🍲'],[/زيت/,'🫒'],[/زبده|سمن/,'🧈'],[/سكر|عسل|مربي/,'🍯'],[/دقيق|نشا/,'🌾'],[/ليمون/,'🍋'],[/موز/,'🍌'],[/تفاح/,'🍎'],[/برتقال|يوسفي/,'🍊'],[/فراوله/,'🍓'],[/شاي|قهوه|نسكافيه/,'☕'],[/بيتزا|فطير/,'🍕'],[/كيك|بسبوسه|كنافه|حلو/,'🍰'],[/ذره|فشار/,'🌽']];
+const foodEmoji=n=>{const k=norm(n);for(const[r,e]of FOOD)if(r.test(k))return e;return '🥘'};
+const emo=m=>(typeof m.emoji==='string'&&m.emoji.trim()&&m.emoji.length<=8)?m.emoji.trim():foodEmoji(m.name);
+
+/* ============ الحالة والحفظ ============ */
+function load(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch{return d}}
+let S=load('lulu-v2',null);
+if(!S||typeof S!=='object'){
+  S={items:[],plan:[],log:[],chat:[],recipes:{}};
+  const old=load('lulu-week',null); // نقل البيانات من النسخة القديمة
+  const src=old?.items?.length?old.items:old?.carry||[];
+  S.items=src.filter(validIng).map(({name,qty,unit})=>({name,qty:+qty,unit}));
+  if(Array.isArray(old?.log))S.log=old.log.filter(l=>l?.name&&l?.date);
+}
+S.items=(S.items||[]).filter(validIng);S.plan=S.plan||[];S.log=S.log||[];S.chat=S.chat||[];S.recipes=S.recipes||{};
+let key='',model='';
+try{key=localStorage.getItem('lulu-gemini')||'';model=key?localStorage.getItem('lulu-model')||'':''}catch{}
+function save(){try{localStorage.setItem('lulu-v2',JSON.stringify(S))}catch{toast({err:true,text:'المتصفح مش قادر يحفظ. افتحي التطبيق من الرابط في Chrome.'})}}
+function prune(){const y=addDays(today(),-1);S.plan=S.plan.filter(m=>m.date>=y);S.log=S.log.slice(-60);const ks=Object.keys(S.recipes);if(ks.length>30)ks.slice(0,ks.length-30).forEach(k=>delete S.recipes[k])}
+function snapshot(){S.undo=JSON.parse(JSON.stringify({items:S.items,plan:S.plan,log:S.log}))}
+const bump=()=>{S.edits=(S.edits||0)+1};
+
+/* ============ منطق المخزون ============ */
+function findIn(list,x){
+  const k=nk(x.name);let m=list.filter(i=>nk(i.name)===k);if(m.length)return m;
+  const a=words(x.name);if(!a.length)return [];
+  m=list.filter(i=>{const b=words(i.name);return b.length&&(subset(a,b)||subset(b,a))});
+  return new Set(m.map(i=>nk(i.name))).size===1?m:[];
+}
+const validOp=o=>o&&['add','use','set'].includes(o.type)&&typeof o.name==='string'&&o.name.trim()&&typeof o.unit==='string'&&o.unit.trim()&&Number.isFinite(+o.qty)&&(+o.qty>0||(o.type==='set'&&+o.qty>=0));
+/* بيطبّق التغييرات على نسخة، ومبيرفضش الطلب كله لو صنف واحد فيه مشكلة */
+function applyOps(items,ops,{quiet=false}={}){
+  let res=items.map(x=>({...x}));const changes=[],notes=[];
+  for(const raw of ops||[]){
+    if(!validOp(raw)){if(!quiet&&raw?.name)notes.push(`مفهمتش كمية «${raw.name}».`);continue}
+    const op={type:raw.type,name:raw.name.trim(),qty:+raw.qty,unit:raw.unit.trim()};
+    const m=findIn(res,op),mc=m.filter(i=>compat(i,op));
+    if(op.type==='add'){
+      if(mc.length){mc[0].qty=round(mc[0].qty+conv(op.qty,op.unit,mc[0].unit))}else res.push({...op,type:undefined});
+      changes.push({s:'+',name:mc[0]?.name||op.name,qty:op.qty,unit:op.unit});
+    }else if(op.type==='set'){
+      const name=(mc[0]||m[0])?.name||op.name;res=res.filter(i=>!m.includes(i));
+      if(op.qty>0)res.push({name,qty:op.qty,unit:op.unit});
+      changes.push({s:'=',name,qty:op.qty,unit:op.unit});
+    }else{
+      if(!m.length){if(!quiet)notes.push(`«${op.name}» مش متسجّلة في المخزون، فمخصمتهاش.`);continue}
+      if(!mc.length){notes.push(`«${m[0].name}» متسجّلة بالـ${m[0].unit}، فمعرفتش أخصم ${qty(op.qty)} ${op.unit}. ظبطيها من المخزون.`);continue}
+      let left=op.qty;
+      for(const x of mc){const have=conv(x.qty,x.unit,op.unit),take=Math.min(left,have);x.qty=round(x.qty-conv(take,op.unit,x.unit));left=round(left-take);if(left<=1e-9)break}
+      const taken=round(op.qty-left);
+      if(taken>0)changes.push({s:'−',name:mc[0].name,qty:taken,unit:op.unit});
+      if(left>1e-9)notes.push(`${mc[0].name} خلصت خالص.`);
+    }
+  }
+  res=res.filter(x=>x.qty>1e-6).map(({name,qty,unit})=>({name,qty,unit}));
+  return {items:res,changes,notes};
+}
+function needsFor(meal){
+  const out=[];
+  for(const g of meal.ingredients||[]){
+    if(!validIng(g)||isStaple(g.name))continue;
+    const m=findIn(S.items,g),mc=m.filter(i=>compat(i,g));
+    if(m.length&&!mc.length){out.push({name:g.name,unclear:true});continue}
+    const have=mc.reduce((v,i)=>v+conv(i.qty,i.unit,g.unit),0);
+    if(have+1e-9<+g.qty)out.push({name:g.name,qty:round(+g.qty-have),unit:g.unit});
+  }
+  return out;
+}
+function shopList(range){
+  const ds=range==='today'?[today()]:upcoming();
+  const demand=[];
+  for(const m of S.plan.filter(m=>ds.includes(m.date)&&!m.cooked))
+    for(const g of m.ingredients||[]){
+      if(!validIng(g)||isStaple(g.name))continue;
+      const f=demand.find(d=>nk(d.name)===nk(g.name)&&compat(d,g));
+      if(f)f.qty+=conv(+g.qty,g.unit,f.unit);else demand.push({name:g.name.trim(),qty:+g.qty,unit:g.unit.trim()});
+    }
+  const out=[];
+  for(const d of demand){
+    const m=findIn(S.items,d),mc=m.filter(i=>compat(i,d));
+    if(m.length&&!mc.length){out.push({name:d.name,unclear:true});continue}
+    const have=mc.reduce((v,i)=>v+conv(i.qty,i.unit,d.unit),0);
+    if(have+1e-9<d.qty)out.push({name:d.name,qty:niceUp(d.qty-have,d.unit),unit:d.unit});
+  }
+  return out;
+}
+const sameMeal=(a,b)=>{const x=words(a),y=words(b);return nk(a)===nk(b)||(x.length&&y.length&&(subset(x,y)||subset(y,x)))};
+
+/* ============ Gemini ============ */
+const SYS='إنتي «لولو»، مساعدة خلود في مطبخ بيتها المصري. اتكلمي مصري بسيط ودافي ومختصر. شغلك تدبير مخزون المطبخ والأكل. متسأليش عن فلوس أو أسعار أو أفراد البيت أو صحة. رجّعي JSON بنفس شكل answer_shape بالظبط. لما تتكلمي عن صنف موجود في stock استعملي اسمه ووحدته زي ما هما بالحرف. الكميات أرقام عشرية (نص=0.5، ربع=0.25). الوحدات المفضلة: كجم، جم، قطعة، كيس، علبة، لتر، مل، كوب.';
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const codeOf=e=>(String(e?.message).match(/^Gemini \((\d+)\)/)||[])[1]||'';
+async function api(path,body,k=key,timeout=45000){
+  let r;
+  try{r=await fetch('https://generativelanguage.googleapis.com/v1beta/'+path,{method:body?'POST':'GET',headers:{'x-goog-api-key':k,...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(timeout)})}
+  catch(e){const x=Error(e?.name==='TimeoutError'?'الرد اتأخر أوي. جرّبي تاني.':'النت فصل. اتأكدي من النت وجرّبي تاني.');x.net=true;throw x}
+  if(!r.ok){
+    let d={};try{d=(await r.json()).error||{}}catch{}
+    const tips={400:'المفتاح أو الطلب فيه مشكلة.',401:'المفتاح مش صحيح.',403:'المفتاح مالوش صلاحية.',404:'النموذج مش متاح.',429:'الاستخدام وصل للحد المسموح، استني دقيقة وجرّبي.',500:'عطل عند Google، جرّبي كمان شوية.',503:'خدمة Google زحمة دلوقتي، جرّبي كمان دقيقة.'};
+    const info=String(d.message||'').split(k).join('…').replace(/AIza[\w-]+/g,'…').slice(0,200);
+    throw Error('Gemini ('+r.status+') · '+(tips[r.status]||'الطلب ما اكتملش.')+(r.status===400&&info?'\n'+info:''));
+  }
+  return r.json();
+}
+/* بيقلل «التفكير» الداخلي للنموذج عشان الرد يبقى أسرع بكتير */
+const noThink=new Set();
+function genConfig(name){
+  const g={responseMimeType:'application/json'};
+  if(/gemini-3/.test(name)){if(!noThink.has(name))g.thinkingConfig={thinkingLevel:'low'}}
+  else{g.temperature=.7;if(/gemini-2\.5-flash/.test(name)&&!noThink.has(name))g.thinkingConfig={thinkingBudget:0}}
+  return g;
+}
+const ver=n=>parseFloat((n.match(/gemini-(\d+(?:\.\d+)?)/)||[])[1])||0;
+const score=n=>ver(n)-(/lite/.test(n)?100:0)-(/preview/.test(n)?10:0);
+async function listModels(k){
+  const a=await api('models?pageSize=1000',null,k,20000);
+  return [...new Set((a.models||[]).filter(m=>/^models\/gemini-\d/.test(m.name)&&/flash/.test(m.name)&&m.supportedGenerationMethods?.includes('generateContent')&&!/image|audio|live|tts|embedding|computer|robotics|thinking|exp|8b/i.test(m.name)).map(m=>m.name))].sort((x,y)=>score(y)-score(x));
+}
+async function chooseModel(k){
+  if(!k)throw Error('اكتب المفتاح الأول.');
+  const list=await listModels(k);
+  if(!list.length)throw Error('مفيش نموذج Flash متاح للمفتاح ده.');
+  try{localStorage.setItem('lulu-models',JSON.stringify(list))}catch{}
+  let last;
+  for(const name of list.slice(0,4)){
+    try{const r=await api(name+':generateContent',{contents:[{role:'user',parts:[{text:'Return {"ok":true}'}]}],generationConfig:genConfig(name)},k,30000);
+      if((r.candidates?.[0]?.content?.parts||[]).some(p=>p.text))return name}
+    catch(e){last=e;if(!e.net&&!['404','429','500','503','400'].includes(codeOf(e)))throw e}
+  }
+  throw last||Error('النماذج مش بترد دلوقتي.');
+}
+/* نموذج احتياطي: Flash تاني + Flash-Lite (أسرع وأقل زحمة) */
+async function backups(){
+  let list=load('lulu-models',null);
+  if(!Array.isArray(list)||!list.length){try{list=await listModels(key);localStorage.setItem('lulu-models',JSON.stringify(list))}catch{list=[]}}
+  const rest=list.filter(m=>m!==model);
+  return [rest.find(m=>!/lite/.test(m)),rest.find(m=>/lite/.test(m))].filter(Boolean);
+}
+async function callOnce(name,task,payload,shape,media,timeout){
+  const body={systemInstruction:{parts:[{text:SYS+'\n\n'+task}]},contents:[{role:'user',parts:[{text:JSON.stringify({...payload,answer_shape:shape})},...(media?[{inlineData:media}]:[])]}],generationConfig:genConfig(name)};
+  let r;
+  try{r=await api(name+':generateContent',body,key,timeout)}
+  catch(e){if(codeOf(e)==='400'&&/think/i.test(e.message)&&!noThink.has(name)){noThink.add(name);return callOnce(name,task,payload,shape,media,timeout)}throw e}
+  const txt=(r.candidates?.[0]?.content?.parts||[]).filter(p=>!p.thought).map(p=>p.text||'').join('');
+  try{return JSON.parse(txt)}catch{const m=txt.match(/\{[\s\S]*\}/);if(m)try{return JSON.parse(m[0])}catch{}}
+  const x=Error('الرد وصل مش مفهوم. جرّبي تاني.');x.retry=true;throw x;
+}
+/* بيجرّب النموذج الأساسي، ولو زحمة أو اتأخر يجرّب تاني ثم يحوّل لنموذج احتياطي لوحده */
+async function ask(task,payload,shape,media=null){
+  if(!key)throw Error('المساعد مش متوصّل.');
+  if(!model){model=await chooseModel(key);try{localStorage.setItem('lulu-model',model)}catch{}}
+  const timeout=media?60000:40000;
+  let tries=[model,model],last;
+  for(let i=0;i<tries.length;i++){
+    const name=tries[i];
+    try{return await callOnce(name,task,payload,shape,media,timeout)}
+    catch(e){
+      last=e;const c=codeOf(e);
+      if(c&&!['404','429','500','502','503','504'].includes(c))throw e;
+      if(c==='404'&&name===model){model='';try{localStorage.removeItem('lulu-model')}catch{}}
+      if(i===0){
+        const b=await backups();
+        // لو المشكلة زحمة: استنى ثانية وجرّب نفس النموذج، ولو تأخير أو حد استخدام: روح للاحتياطي على طول
+        tries=(c==='503'||c==='500'||e.retry)?[model||b[0],...b]:[model||b[0],...b].slice(1);
+        tries=[name,...tries.filter(Boolean)];
+        if(c==='503'||c==='500'){$('thinkText').textContent='Google زحمة شوية، بجرّب تاني…';await sleep(1200)}
+        else $('thinkText').textContent='بجرّب طريق أسرع يا لولو…';
+      }
+    }
+  }
+  throw last;
+}
+
+const TASK_PLAN='اقترحي أكلة رئيسية مصرية واحدة (الغدا) لكل تاريخ في dates. اعتمدي على الموجود في stock على قد ما تقدري. أكلات خلود المفضلة: بشاميل بالفراخ، بانيه ومكرونة، رز بالعدس؛ اقترحيها لما مكوناتها تكون متاحة من غير تكرار ممل. متكرريش أكلة في recent أو keep أو avoid. في ingredients اكتبي المكونات الأساسية بكمياتها لطبخة البيت كلها، وباسم ووحدة stock لو الصنف موجود. متكتبيش ملح ولا بهارات ولا مية. emoji: إيموجي أكل واحد مناسب.';
+const TASK_RECIPE='اكتبي طريقة عمل الأكلة دي لبيت مصري. ingredients: سطر لكل مكوّن بكميته. steps: خطوات قصيرة بالترتيب وفيها أوقات التسوية. لو مكوّن مش موجود في stock اقترحي بديل من الموجود بين قوسين.';
+const TASK_CMD=`افهمي طلب خلود (كلام مكتوب أو فويس أو صورة) ورجّعي:
+- reply: رد قصير ودافي بالمصري (جملة أو اتنين). لو سألت هتعمل إيه، اقترحي من الموجود بعد التعديلات. لو طلبت وصفة اكتبيها مختصرة في reply.
+- ops: التغييرات الصريحة على المخزون بس. add = اشترت أو جالها. use = استخدمت كمية معروفة. set = قالت إن اللي عندها إجمالًا كمية معينة (جرد)، ولو قالت «خلص الصنف» استعملي set بكمية 0.
+- متخصميش حاجة لمجرد إنها نفسها تعمل أكلة أو بتسأل عنها.
+- لو الكمية مبهمة (شوية، حبة صغيرة) متعمليش op لها، واسأليها عن الكمية في reply.
+- cooked: لو قالت إنها طبخت أكلة رجّعي {name,date} وdate هو today أو yesterday حسب كلامها. لو ذكرت المقادير اللي استخدمتها حطيها use في ops، ولو مذكرتهاش متخمّنيش كميات.
+- meal: لو طلبت صراحة تغيّر أكلة يوم معيّن رجّعي {date,name,emoji,ingredients} وdate من plan.
+- clear: true بس لو طلبت صراحة تمسح المخزون كله.
+- للصورة: اقري الأصناف والكميات الواضحة بس، متخمّنيش أوزان، واعتبريها add إلا لو قالت غير كده، واسألي عن اللي مش واضح.
+- لو مفيش تغيير: ops [] وcooked null وmeal null وclear false.`;
+
+async function planDays(dates,avoid=[]){
+  const keep=S.plan.filter(m=>!dates.includes(m.date)&&m.date>=today()).map(m=>({date:m.date,name:m.name}));
+  const a=await ask(TASK_PLAN,{dates:dates.map(d=>({date:d,day:weekday(d)})),stock:S.items,keep,recent:S.log.slice(-10).map(l=>l.name),avoid},{meals:[{date:'YYYY-MM-DD',name:'',emoji:'🍲',ingredients:[{name:'',qty:1,unit:''}]}]});
+  if(!Array.isArray(a?.meals))throw Error('الاقتراحات وصلت ناقصة. جرّبي تاني.');
+  const out=[];
+  for(const m of a.meals){
+    if(!m||!dates.includes(m.date)||typeof m.name!=='string'||!m.name.trim()||out.some(o=>o.date===m.date))continue;
+    out.push({date:m.date,name:m.name.trim(),emoji:typeof m.emoji==='string'?m.emoji.trim().slice(0,8):'',ingredients:(Array.isArray(m.ingredients)?m.ingredients:[]).filter(validIng).map(g=>({name:g.name.trim(),qty:+g.qty,unit:g.unit.trim()}))});
+  }
+  if(!out.length)throw Error('الاقتراحات وصلت ناقصة. جرّبي تاني.');
+  return out;
+}
+
+/* ============ الخطة ============ */
+let planning=false,swapping=null;
+async function fillPlan(force=false){
+  if(planning||!key||!S.items.length)return;
+  const ds=upcoming().filter(d=>{const m=S.plan.find(x=>x.date===d);return force?!(m&&m.cooked):!m});
+  if(!ds.length)return;
+  planning=true;const ed=S.planEdits||0;render();
+  try{
+    const ms=await planDays(ds);const touched=(S.planEdits||0)!==ed;
+    for(const m of ms){const cur=S.plan.find(x=>x.date===m.date);if(cur&&(cur.cooked||(touched&&cur.manual)||(!force&&cur)))continue;S.plan=S.plan.filter(x=>x.date!==m.date).concat(m)}
+    S.plan.sort((a,b)=>a.date<b.date?-1:1);save();
+    if(force)toast({title:'جهّزت خطة جديدة 🍽'});
+  }catch(e){toast({err:true,text:e.message})}
+  finally{planning=false;render()}
+}
+async function swapMeal(date){
+  if(!key)return openSettings();if(swapping||planning)return;
+  const cur=S.plan.find(x=>x.date===date);swapping=date;closeSheet();render();
+  try{const [m]=await planDays([date],cur?[cur.name]:[]);S.plan=S.plan.filter(x=>x.date!==date).concat(m).sort((a,b)=>a.date<b.date?-1:1);save();toast({title:`${dayLabel(date)}: ${m.name} ${emo(m)}`})}
+  catch(e){toast({err:true,text:e.message})}
+  finally{swapping=null;render()}
+}
+function cookMeal(date){
+  const m=S.plan.find(x=>x.date===date);if(!m||m.cooked)return;
+  snapshot();
+  let res={items:S.items,changes:[],notes:[]};
+  if(!S.log.some(l=>l.date===date&&sameMeal(l.name,m.name))){
+    res=applyOps(S.items,(m.ingredients||[]).filter(g=>validIng(g)&&!isStaple(g.name)).map(g=>({type:'use',name:g.name,qty:+g.qty,unit:g.unit})),{quiet:true});
+    S.log.push({name:m.name,date});
+  }
+  S.items=res.items;m.cooked=true;if(date<today())S.promptDay=today();bump();save();closeSheet();render();
+  toast({title:'بالهنا والشفا 😋',changes:res.changes,notes:[...res.notes,'لو استخدمتي كميات مختلفة قوليلي بالفويس وأنا أظبطها.'],undo:true});
+}
+
+/* ============ الأوامر (فويس / كتابة / صورة) ============ */
+let busy=false,lastCmd=null;
+async function command(q,media=null){
+  q=(q||'').trim();if(busy||(!q&&!media))return;if(!key)return openSettings();lastCmd={q,media};
+  busy=true;thinking(true,media?.mimeType.startsWith('image/')?'بقرا الصورة يا لولو…':'بفكّر يا لولو…');const ed=S.edits||0;
+  try{
+    const t=today(),y=addDays(t,-1);
+    const r=await ask(TASK_CMD,{
+      request:q||(media?.mimeType.startsWith('audio')?'(الطلب في الفويس المرفق)':'(صورة مرفقة)'),
+      stock:S.items,plan:S.plan.filter(m=>m.date>=y).map(m=>({date:m.date,day:dayLabel(m.date),name:m.name,cooked:!!m.cooked})),
+      recent:S.log.slice(-8),today:t,yesterday:y,history:S.chat.slice(-3)
+    },{reply:'',ops:[{type:'add|use|set',name:'',qty:1,unit:''}],cooked:null,meal:null,clear:false,formats:{cooked:{name:'',date:'YYYY-MM-DD'},meal:{date:'YYYY-MM-DD',name:'',emoji:'',ingredients:[{name:'',qty:1,unit:''}]}}},media);
+    if((S.edits||0)!==ed)throw Error('المخزون اتغيّر وأنا بفكّر. جرّبي تاني.');
+    if(typeof r?.reply!=='string')throw Error('الرد وصل ناقص. جرّبي تاني.');
+    const ops=Array.isArray(r.ops)?r.ops:[];
+    let res=applyOps(S.items,ops);
+    thinking(false);
+    if(media?.mimeType.startsWith('image/')&&res.changes.length){
+      if(!await confirmSheet('دي الأصناف اللي قريتها',`<div class="chips light">${chipsHTML(res.changes)}</div><p class="muted">لو فيه حاجة غلط، دوسي رجوع وقوليها بالفويس.</p>`,'✓ سجّليهم'))return;
+    }
+    if(r.clear===true){
+      if(!await confirmSheet('تمسحي المخزون كله؟','<p>كل الأصناف هتتمسح، وتقدري تتراجعي على طول بعدها.</p>','امسحيه',true))return;
+      res={items:[],changes:[{s:'🧹',name:'اتمسح المخزون كله'}],notes:[]};
+    }
+    let plan=S.plan.map(m=>({...m})),log=[...S.log],planEdit=false;
+    const c=r.cooked;
+    if(c&&typeof c.name==='string'&&c.name.trim()&&(c.date===t||c.date===y)){
+      const name=c.name.trim();
+      if(log.some(l=>l.date===c.date&&sameMeal(l.name,name)))res.notes.push(`${name} متسجّلة ${dayLabel(c.date)} قبل كده.`);
+      else{
+        log.push({name,date:c.date});
+        const pm=plan.find(m=>m.date===c.date);
+        if(pm&&sameMeal(pm.name,name)){
+          pm.cooked=true;
+          if(!ops.some(o=>o?.type==='use')){
+            const r2=applyOps(res.items,(pm.ingredients||[]).filter(g=>validIng(g)&&!isStaple(g.name)).map(g=>({type:'use',name:g.name,qty:+g.qty,unit:g.unit})),{quiet:true});
+            res.items=r2.items;res.changes.push(...r2.changes);res.notes.push(...r2.notes);
+            if(r2.changes.length)res.notes.push('خصمت مقادير الوصفة، ولو استخدمتي غيرها قوليلي.');
+          }
+        }else{plan=plan.filter(m=>m.date!==c.date);plan.push({date:c.date,name,emoji:'',ingredients:[],cooked:true})}
+        if(c.date===y)S.promptDay=t;
+        res.changes.push({s:'🍳',name:name+' · '+dayLabel(c.date)});
+      }
+    }
+    const mm=r.meal;
+    if(mm&&typeof mm.name==='string'&&mm.name.trim()&&upcoming().includes(mm.date)){
+      plan=plan.filter(m=>m.date!==mm.date);
+      plan.push({date:mm.date,name:mm.name.trim(),emoji:typeof mm.emoji==='string'?mm.emoji.slice(0,8):'',ingredients:(Array.isArray(mm.ingredients)?mm.ingredients:[]).filter(validIng).map(g=>({name:g.name.trim(),qty:+g.qty,unit:g.unit.trim()})),manual:true});
+      res.changes.push({s:'📅',name:dayLabel(mm.date)+': '+mm.name.trim()});planEdit=true;
+    }
+    const mutated=res.changes.length>0;
+    if(mutated){snapshot();S.items=res.items;S.plan=plan.sort((a,b)=>a.date<b.date?-1:1);S.log=log.slice(-60);bump();if(planEdit)S.planEdits=(S.planEdits||0)+1}
+    const reply=r.reply.trim()||'تمام ✓';
+    S.chat.push({q:q||(media?.mimeType.startsWith('audio')?'🎙':'📷'),a:reply});S.chat=S.chat.slice(-6);
+    save();$('ask').value='';render();
+    toast({title:reply,changes:res.changes,notes:res.notes,undo:mutated});
+    lastCmd=null;
+    if(S.items.length&&!S.plan.some(m=>m.date===t))fillPlan();
+  }catch(e){toast({err:true,text:e.message,retry:!!lastCmd})}
+  finally{busy=false;thinking(false)}
+}
+function undo(){
+  if(!S.undo)return;const u=S.undo;Object.assign(S,{items:u.items,plan:u.plan,log:u.log,undo:null});bump();save();render();
+  toast({title:'رجّعت آخر تعديل ↩'});
+}
+
+/* ============ الفويس ============ */
+let rec=null;
+const bars=Array.from({length:26},()=>document.createElement('i'));bars.forEach(b=>$('bars').append(b));
+async function startVoice(hint){
+  if(busy||rec)return;if(!key)return openSettings();
+  if(!navigator.mediaDevices?.getUserMedia)return toast({err:true,text:'الميكروفون محتاج التطبيق يتفتح من رابطه (https) في Chrome.'});
+  navigator.vibrate?.(15);
+  let stream,ctx;
+  try{
+    ctx=new AudioContext({sampleRate:16000});
+    stream=await navigator.mediaDevices.getUserMedia({audio:{channelCount:1,echoCancellation:true,noiseSuppression:true}});
+    await ctx.resume();
+    const src=ctx.createMediaStreamSource(stream),proc=ctx.createScriptProcessor(4096,1,1),samples=[],levels=Array(26).fill(0);
+    proc.onaudioprocess=e=>{const d=e.inputBuffer.getChannelData(0);samples.push(d.slice());let s=0;for(let i=0;i<d.length;i+=16)s+=d[i]*d[i];levels.push(Math.min(1,Math.sqrt(s/(d.length/16))*7));levels.shift()};
+    src.connect(proc);proc.connect(ctx.destination);
+    const start=Date.now();
+    rec={stream,ctx,src,proc,samples,start};
+    $('recHint').textContent=hint||'اتكلمي براحتك… مثلًا: «اشتريت كيلو فراخ، والرز خلص، أعمل إيه بكرة؟»';
+    $('recTime').textContent='0:00';$('rec').hidden=false;
+    rec.timer=setInterval(()=>{const s=Math.floor((Date.now()-start)/1000);$('recTime').textContent=Math.floor(s/60)+':'+pad(s%60);bars.forEach((b,i)=>b.style.height=(6+levels[i]*44)+'px');if(s>=60)stopVoice(true)},110);
+  }catch(e){
+    stream?.getTracks().forEach(t=>t.stop());ctx?.close().catch(()=>{});
+    toast({err:true,text:e.name==='NotAllowedError'?'لازم تسمحي للميكروفون: من القفل اللي جنب الرابط في Chrome ← الأذونات ← الميكروفون.':'الميكروفون مش راضي يشتغل. جرّبي تاني.'});
+  }
+}
+async function stopVoice(send){
+  const r=rec;if(!r)return;rec=null;clearInterval(r.timer);r.proc.onaudioprocess=null;
+  try{r.proc.disconnect();r.src.disconnect()}catch{}
+  r.stream.getTracks().forEach(t=>t.stop());const rate=r.ctx.sampleRate;r.ctx.close().catch(()=>{});
+  $('rec').hidden=true;if(!send)return;
+  if(!r.samples.length||Date.now()-r.start<800)return toast({text:'التسجيل قصير أوي، جرّبي تاني.'});
+  command($('ask').value,{mimeType:'audio/wav',data:await b64(wav(r.samples,rate))});
+}
+function b64(blob){return new Promise((ok,no)=>{const f=new FileReader();f.onload=()=>ok(String(f.result).split(',')[1]);f.onerror=()=>no(Error('تعذّر تجهيز الملف.'));f.readAsDataURL(blob)})}
+function wav(chunks,rate){
+  const n=chunks.reduce((v,c)=>v+c.length,0),buf=new ArrayBuffer(44+n*2),v=new DataView(buf);
+  const tag=(at,s)=>{for(let j=0;j<s.length;j++)v.setUint8(at+j,s.charCodeAt(j))};
+  tag(0,'RIFF');v.setUint32(4,36+n*2,true);tag(8,'WAVE');tag(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+  v.setUint32(24,rate,true);v.setUint32(28,rate*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);tag(36,'data');v.setUint32(40,n*2,true);
+  let i=44;for(const c of chunks)for(const f of c){v.setInt16(i,Math.max(-1,Math.min(1,f))*32767,true);i+=2}
+  return new Blob([buf],{type:'audio/wav'});
+}
+async function photo(file,input){
+  if(!file)return;const url=URL.createObjectURL(file),img=new Image();
+  try{img.src=url;await img.decode();const sc=Math.min(1,1280/Math.max(img.width,img.height)),cv=document.createElement('canvas');
+    cv.width=Math.max(1,Math.round(img.width*sc));cv.height=Math.max(1,Math.round(img.height*sc));cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+    await command($('ask').value||'سجّلي الأصناف اللي في الصورة.',{mimeType:'image/jpeg',data:cv.toDataURL('image/jpeg',.8).split(',')[1]})}
+  catch{toast({err:true,text:'معرفتش أفتح الصورة. جرّبي صورة تانية.'})}
+  finally{URL.revokeObjectURL(url);if(input)input.value=''}
+}
+
+/* ============ الواجهة ============ */
+let toastT;
+function chipsHTML(ch){return ch.map(c=>{const sign=c.s==='+'||c.s==='−';return `<span class="chip ${c.s==='+'?'p':c.s==='−'?'m':''}">${sign?c.s:c.s==='='?'':esc(c.s)+' '}${c.qty!=null?qty(c.qty)+' '+esc(c.unit)+' ':''}${esc(c.name)}${c.s==='='?' (جرد)':''}</span>`}).join('')}
+function toast({title,text,changes=[],notes=[],undo=false,err=false,retry=false}){
+  const t=$('toast');clearTimeout(toastT);t.className='toast'+(err?' err':'');
+  t.innerHTML=`${title||text?`<div class="t-title">${esc(title||text)}</div>`:''}${changes.length?`<div class="chips">${chipsHTML(changes)}</div>`:''}${notes.map(n=>`<p class="note">• ${esc(n)}</p>`).join('')}<div class="t-acts">${retry?'<button data-act="retry">↻ جرّبي تاني</button>':''}${undo?'<button data-act="undo">↩ تراجعي</button>':''}<button data-act="toastClose">تمام</button></div>`;
+  t.hidden=false;toastT=setTimeout(()=>t.hidden=true,notes.length||err||(title||'').length>90?14000:7000);
+}
+let thinkT;
+function thinking(on,text){clearTimeout(thinkT);$('thinking').hidden=!on;if(text)$('thinkText').textContent=text;if(on){$('toast').hidden=true;thinkT=setTimeout(()=>$('thinkText').textContent='لسه بفكّر يا لولو… ثواني',9000)}}
+
+const sheet=$('sheet');let pending=null,sheetTok=0;
+function openSheet(html){if(pending){const p=pending;pending=null;p(false)}sheetTok++;$('sheetBody').innerHTML='<div class="grab"></div>'+html;if(!sheet.open)sheet.showModal();sheet.scrollTop=0;return sheetTok}
+function closeSheet(){if(sheet.open)sheet.close()}
+sheet.addEventListener('close',()=>{if(pending){const p=pending;pending=null;p(false)}});
+sheet.addEventListener('click',e=>{if(e.target===sheet)closeSheet();const li=e.target.closest('.steps li');if(li)li.classList.toggle('done')});
+function confirmSheet(title,html,okText,danger=false){return new Promise(res=>{openSheet(`<h2 tabindex="-1" autofocus>${esc(title)}</h2>${html}<button class="btn ${danger?'danger':'ok'}" data-act="cfYes">${esc(okText)}</button><button class="btn ghost" data-act="cfNo">لأ، رجوع</button>`);pending=res})}
+
+function badge(m){
+  if(m.cooked)return '<span class="badge b-done">✓ اتطبخت</span>';
+  const n=needsFor(m);if(!n.length)return '<span class="badge b-ok">✓ متاحة من الموجود</span>';
+  const names=n.map(x=>x.name);return `<span class="badge b-miss">ناقص: ${esc(names.slice(0,2).join('، '))}${names.length>2?' +'+num(names.length-2):''}</span>`;
+}
+function mealCard(m,kind){
+  const big=kind==='big',sw=swapping===m.date;
+  const inner=`<div class="plate">${sw?'⏳':esc(emo(m))}</div><div class="info" ${big?`data-act="recipe" data-date="${m.date}"`:''}><span class="day">${dayLabel(m.date)}${big?' · الغدا':''}</span><h3>${sw?'بدوّر على أكلة تانية…':esc(m.name)}</h3>${sw?'':badge(m)}</div>`;
+  if(!big)return `<button class="meal ${kind} ${m.cooked?'done':''}" data-act="recipe" data-date="${m.date}">${inner}</button>`;
+  const acts=`<div class="acts"><button data-act="recipe" data-date="${m.date}">📖 الطريقة</button>${m.cooked?'':`<button class="pri" data-act="cook" data-date="${m.date}">✓ عملتها</button><button class="x" data-act="swap" data-date="${m.date}" aria-label="غيّري الأكلة">↻</button>`}</div>`;
+  return `<article class="meal big ${m.cooked?'done':''}">${inner}${acts}</article>`;
+}
+function renderHome(){
+  const h=new Date().getHours();
+  $('greet').textContent=h<12?'صباح الفل يا لولو ☀️':h<18?'نهارك سعيد يا لولو 🌿':'مساء الفل يا لولو 🌙';
+  $('dateLine').textContent=new Date().toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long'});
+  $('installBox').innerHTML=installEvt?'<div class="install">📲 ثبّتي مطبخ لولو على الشاشة<button data-act="install">ثبّتيه</button></div>':'';
+  const last=S.chat.at(-1);
+  $('bubble').innerHTML=last?`<div class="bubble"><span class="av">🍲</span><div class="tx">${esc(last.a)}${S.undo?'<button class="undo-l" data-act="undo">↩ تراجعي عن آخر تعديل</button>':''}</div></div>`:'';
+  const t=today(),y=addDays(t,-1),ym=S.plan.find(m=>m.date===y);
+  $('yday').innerHTML=(key&&ym&&!ym.cooked&&S.promptDay!==t&&!S.log.some(l=>l.date===y))?`<div class="yday"><b>امبارح كان عليه ${esc(ym.name)} ${esc(emo(ym))} — عملتيها؟</b><div class="acts"><button class="pri" data-act="cook" data-date="${y}">أيوه ✓</button><button data-act="yother">عملت حاجة تانية</button><button class="x" data-act="ydismiss" aria-label="إخفاء">✕</button></div></div>`:'';
+  const box=$('todayBox'),ready=key&&S.items.length;
+  if(!key)box.innerHTML=`<div class="welcome"><span class="em">🔌</span><b>المساعد محتاج يتوصّل</b><p class="muted">مرة واحدة بس، وبعدها كل حاجة بالفويس.</p><button class="btn pri" data-act="settings">توصيل المساعد</button></div>`;
+  else if(!S.items.length)box.innerHTML=`<div class="welcome"><span class="em">🧺</span><b>قوليلي عندك إيه في المطبخ</b><p class="muted">دوسي الميكروفون واتكلمي عادي، زي:</p><q>عندي كيلو فراخ وكيسين مكرونة وكيلو رز وطماطم وبصل</q><div class="two"><button class="btn ok" data-act="voice">🎙 قوليها</button><button class="btn ghost" data-act="addItem">＋ بإيدك</button></div></div>`;
+  else{const m=S.plan.find(x=>x.date===t);box.innerHTML=m?mealCard(m,'big'):planning?'<div class="skel"></div>':`<div class="welcome"><span class="em">🍽</span><b>لسه مفيش أكلة للنهارده</b><button class="btn pri" data-act="fill">اقترحي عليّا</button></div>`}
+  const mt=S.plan.find(x=>x.date===addDays(t,1));
+  $('tomorrowBox').innerHTML=ready?(mt?mealCard(mt,'tmw'):planning?'<div class="skel" style="height:96px"></div>':''):'';
+  $('weekWrap').hidden=!ready;
+  $('weekStrip').innerHTML=upcoming().slice(2).map(d=>{
+    const m=S.plan.find(x=>x.date===d);
+    if(!m)return `<button class="mini" ${planning?'':'data-act="fill"'}><span class="day">${dayLabel(d)}</span><div class="plate">${planning?'⏳':'＋'}</div><b>${planning?'بنحضّر…':'اقترحي'}</b></button>`;
+    const n=m.cooked?null:needsFor(m);
+    return `<button class="mini" data-act="recipe" data-date="${d}"><span class="day">${dayLabel(d)}</span><div class="plate">${swapping===d?'⏳':esc(emo(m))}</div><b>${esc(m.name)}</b><span class="dot ${m.cooked?'d':n.length?'m':''}"></span></button>`;
+  }).join('');
+}
+let stockQ='';
+function renderStock(){
+  const g=$('stockGrid');$('stockCount').textContent=S.items.length?num(S.items.length)+' صنف':'';
+  if(!S.items.length){g.innerHTML='<div class="empty"><span class="big">🧺</span><b>المخزون فاضي</b>قوليلي اللي عندك بالفويس، أو ضيفي صنف بإيدك.</div>';return}
+  const shop=shopList('all');
+  const list=S.items.map((x,i)=>({x,i})).filter(({x})=>!stockQ||nk(x.name).includes(nk(stockQ))).sort((a,b)=>a.x.name.localeCompare(b.x.name,'ar'));
+  g.innerHTML=list.map(({x,i})=>{const low=shop.some(s=>findIn([x],s).length);return `<button class="tile ${low?'low':''}" data-act="editItem" data-i="${i}"><span class="em">${foodEmoji(x.name)}</span><span><b>${esc(x.name)}</b><small>${qty(x.qty)} ${esc(x.unit)}</small>${low?'<span class="flag">مش مكفّي الخطة</span>':''}</span></button>`}).join('')||'<p class="muted">مفيش صنف بالاسم ده.</p>';
+}
+let shopRange='all';const shopOff=new Set();
+function renderShop(){
+  document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.range===shopRange));
+  const box=$('shopList'),empty=(e,b,p)=>`<div class="empty"><span class="big">${e}</span><b>${b}</b>${p}</div>`;
+  if(!S.plan.some(m=>m.date>=today()&&!m.cooked)){box.innerHTML=empty('🛒','لسه مفيش خطة','لما خطة الأكل تجهز هقولك الناقص.');return}
+  const L=shopList(shopRange);
+  if(!L.length){box.innerHTML=empty('👌','كله موجود','مفيش حاجة ناقصة للفترة دي.');return}
+  box.innerHTML=L.map(x=>{const k=nk(x.name),off=shopOff.has(k);return `<label class="check ${off?'off':''}"><input type="checkbox" data-k="${esc(k)}" ${off?'':'checked'}><span class="em">${foodEmoji(x.name)}</span><b>${esc(x.name)}</b><small>${x.unclear?'راجعي العبوة':qty(x.qty)+' '+esc(x.unit)}</small></label>`}).join('')
+   +'<label class="field">الرسالة (تقدري تعدّليها)<textarea id="waText" rows="5"></textarea></label><button class="btn wa" data-act="wa">💬 ابعتيها واتساب</button><button class="btn ghost" data-act="bought">✓ اشتريتهم، ضيفيهم للمخزون</button>';
+  fillWa(L);
+}
+function fillWa(L=shopList(shopRange)){const t=$('waText');if(!t)return;const on=L.filter(x=>!shopOff.has(nk(x.name)));t.value=`طلبات البيت ${shopRange==='today'?'النهارده':'للأيام الجاية'} 🛒\n`+on.map(x=>'• '+x.name+(x.unclear?'':' — '+qty(x.qty)+' '+x.unit)).join('\n')}
+function render(){renderHome();renderStock();renderShop();$('mic').classList.toggle('hint',!!key&&!S.items.length)}
+function showTab(t){document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('on',s.id==='tab-'+t));document.querySelectorAll('.nav [data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));scrollTo({top:0})}
+
+/* ============ الشيتات ============ */
+async function openRecipe(date){
+  const m=S.plan.find(x=>x.date===date);if(!m)return;
+  const k=nk(m.name),cached=S.recipes[k],n=m.cooked?[]:needsFor(m);
+  const body=r=>`<h3>المقادير</h3><ul class="ing">${r.ingredients.map(t=>`<li>${esc(t)}</li>`).join('')}</ul><h3>الطريقة <small class="muted" style="font-size:13px">(دوسي على الخطوة لما تخلصيها)</small></h3><ol class="steps">${r.steps.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`;
+  const tok=openSheet(`<div class="rcp-head"><div class="plate">${esc(emo(m))}</div><div><span class="day">${dayLabel(date)}</span><h2>${esc(m.name)}</h2>${badge(m)}</div></div>`
+    +(n.length?`<div class="needbox"><b>ناقصك:</b> ${esc(n.map(x=>x.name+(x.unclear?' (راجعي العبوة)':' '+qty(niceUp(x.qty,x.unit))+' '+x.unit)).join('، '))}</div>`:'')
+    +`<div id="rcpBody">${cached?body(cached):key?'<div class="skel" style="height:200px"></div><p class="muted center">بكتب الطريقة يا لولو…</p>':'<p>وصّلي المساعد عشان تظهر الطريقة.</p>'}</div>`
+    +(!m.cooked&&date<=today()?`<button class="btn ok" data-act="cook" data-date="${date}">✓ عملتها ${dayLabel(date)}</button>`:'')
+    +(!m.cooked?`<button class="btn ghost" data-act="swap" data-date="${date}">↻ غيّري الأكلة دي</button>`:''));
+  if(cached||!key)return;
+  try{
+    const r=await ask(TASK_RECIPE,{meal:{name:m.name,ingredients:m.ingredients},stock:S.items},{ingredients:[''],steps:['']});
+    if(![r.ingredients,r.steps].every(a=>Array.isArray(a)&&a.length&&a.every(t=>typeof t==='string')))throw Error('الطريقة وصلت ناقصة.');
+    S.recipes[k]={ingredients:r.ingredients,steps:r.steps};prune();save();
+    if(tok===sheetTok&&sheet.open)$('rcpBody').innerHTML=body(r);
+  }catch(e){if(tok===sheetTok&&sheet.open)$('rcpBody').innerHTML=`<p>${esc(e.message)}</p><button class="btn ghost" data-act="recipe" data-date="${date}">جرّبي تاني</button>`}
+}
+const stepFor=u=>{const [b,f]=measure(u);return f===1000?.25:(b==='جم'||b==='مل')?50:1};
+function editItem(i){
+  const x=i>=0?S.items[i]:{name:'',qty:1,unit:'كجم'};
+  openSheet(`<h2 tabindex="-1" autofocus>${i>=0?esc(foodEmoji(x.name)+' '+x.name):'صنف جديد'}</h2><form id="itemForm">
+    <label class="field">اسم الصنف<input name="name" required value="${esc(x.name)}" placeholder="مثلًا: فراخ"></label>
+    <span class="field">الكمية</span><div class="stepper"><button type="button" data-step="1" aria-label="زوّدي">+</button><input name="qty" type="number" inputmode="decimal" min="0" step="any" required value="${esc(x.qty)}"><button type="button" data-step="-1" aria-label="قلّلي">−</button></div>
+    <label class="field">الوحدة<input name="unit" required value="${esc(x.unit)}"></label>
+    <div class="uchips">${['كجم','جم','قطعة','كيس','علبة','لتر','كوب'].map(u=>`<button type="button" data-u="${u}" class="${u===x.unit?'on':''}">${u}</button>`).join('')}</div>
+    <button class="btn pri">حفظ</button>${i>=0?'<button type="button" class="btn danger" id="delItem">حذف الصنف</button>':''}</form>`);
+  const f=$('itemForm'),qi=f.elements.qty,ui=f.elements.unit;
+  f.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>{qi.value=round(Math.max(0,(+qi.value||0)+ +b.dataset.step*stepFor(ui.value)))});
+  f.querySelectorAll('[data-u]').forEach(b=>b.onclick=()=>{ui.value=b.dataset.u;f.querySelectorAll('[data-u]').forEach(c=>c.classList.toggle('on',c===b))});
+  f.onsubmit=e=>{e.preventDefault();const name=f.elements.name.value.trim(),q=+qi.value,unit=ui.value.trim();
+    if(!name||!unit||!Number.isFinite(q)||q<0)return toast({err:true,text:'راجعي الاسم والكمية والوحدة.'});
+    snapshot();let items=S.items.map(y=>({...y}));
+    if(i>=0){if(q>0)items[i]={name,qty:q,unit};else items.splice(i,1)}else if(q>0)items=applyOps(items,[{type:'add',name,qty:q,unit}]).items;
+    S.items=items;bump();save();closeSheet();render();toast({title:i>=0?'اتعدّل ✓':'اتضاف ✓',undo:true});
+    if(i<0&&key&&!S.plan.some(m=>m.date===today()))fillPlan()};
+  const d=$('delItem');if(d)d.onclick=()=>{if(!d.dataset.sure){d.dataset.sure=1;d.textContent='متأكدة؟ دوسي تاني للحذف';return}snapshot();S.items.splice(i,1);bump();save();closeSheet();render();toast({title:'اتحذف',undo:true})};
+}
+function openSettings(){
+  openSheet(`<h2 tabindex="-1" autofocus>توصيل المساعد</h2><p class="muted">المساعد شغّال بـ Gemini من Google. المفتاح بيتحط مرة واحدة على الموبايل ده وبيتحفظ عليه. تقدر تعمل مفتاح مجاني من Google AI Studio.</p>
+  <form id="keyForm"><label class="field">مفتاح Gemini API<input id="keyIn" type="password" autocomplete="off" dir="ltr" required></label><button class="btn pri">توصيل واختبار</button></form><p id="keyMsg" class="muted" style="white-space:pre-line"></p>
+  ${key?`<p class="muted">متوصّل ✓ ${model?esc('· '+model.replace('models/','')):''}</p><button class="btn danger" data-act="forget">مسح المفتاح</button>`:''}`);
+  $('keyIn').value=key;
+  $('keyForm').onsubmit=async e=>{e.preventDefault();const k=$('keyIn').value.trim(),b=e.target.querySelector('button');b.disabled=true;$('keyMsg').textContent='بنجرّب التوصيل…';
+    try{const m=await chooseModel(k);localStorage.setItem('lulu-gemini',k);localStorage.setItem('lulu-model',m);key=k;model=m;closeSheet();render();toast({title:'المساعد اتوصّل ✓'});fillPlan()}
+    catch(err){$('keyMsg').textContent=err.message}finally{b.disabled=false}};
+}
+
+/* ============ الأحداث ============ */
+const ACT={
+  settings:openSettings,
+  forget:()=>{try{localStorage.removeItem('lulu-gemini');localStorage.removeItem('lulu-model')}catch{}key=model='';closeSheet();render()},
+  addItem:()=>editItem(-1),editItem:d=>editItem(+d.i),
+  voice:()=>startVoice(),fill:()=>fillPlan(),replan:()=>fillPlan(true),
+  recipe:d=>openRecipe(d.date),cook:d=>cookMeal(d.date),swap:d=>swapMeal(d.date),
+  cam:()=>{closeSheet();$('photoCam').click()},lib:()=>{closeSheet();$('photoLib').click()},
+  retry:()=>{$('toast').hidden=true;if(lastCmd)command(lastCmd.q,lastCmd.media)},
+  undo,toastClose:()=>{$('toast').hidden=true},
+  yother:()=>{S.promptDay=today();save();render();startVoice('قولي عملتي إيه امبارح، ولو تفتكري المقادير قوليها.')},
+  ydismiss:()=>{S.promptDay=today();save();render()},
+  cfYes:()=>{const p=pending;pending=null;closeSheet();p?.(true)},cfNo:()=>closeSheet(),
+  wa:()=>{const t=$('waText')?.value.trim();if(t)window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank')},
+  bought:()=>{const L=shopList(shopRange).filter(x=>!x.unclear&&!shopOff.has(nk(x.name)));if(!L.length)return;
+    const r=applyOps(S.items,L.map(x=>({type:'add',name:x.name,qty:x.qty,unit:x.unit})));snapshot();S.items=r.items;bump();shopOff.clear();save();render();toast({title:'ضفتهم للمخزون 🧺',changes:r.changes,undo:true})},
+  install:async()=>{const e=installEvt;installEvt=null;render();if(e){e.prompt();await e.userChoice.catch(()=>{})}}
+};
+document.addEventListener('click',e=>{
+  const tb=e.target.closest('[data-tab]');if(tb)return showTab(tb.dataset.tab);
+  const rg=e.target.closest('.seg [data-range]');if(rg){shopRange=rg.dataset.range;return renderShop()}
+  const b=e.target.closest('[data-act]');if(b&&!b.disabled)ACT[b.dataset.act]?.(b.dataset);
+});
+$('shopList').addEventListener('change',e=>{const c=e.target.closest('input[data-k]');if(!c)return;c.checked?shopOff.delete(c.dataset.k):shopOff.add(c.dataset.k);c.closest('.check').classList.toggle('off',!c.checked);fillWa()});
+$('askForm').onsubmit=e=>{e.preventDefault();command($('ask').value)};
+$('mic').onclick=()=>startVoice();
+$('recSend').onclick=()=>stopVoice(true);$('recCancel').onclick=()=>stopVoice(false);
+$('cameraBtn').onclick=()=>{if(busy)return;if(!key)return openSettings();openSheet('<h2 tabindex="-1" autofocus>صورة</h2><p class="muted">صوّري الحاجة اللي اشتريتيها أو الفاتورة، وأنا أسجّلها.</p><button class="btn pri" data-act="cam">📸 صوّري دلوقتي</button><button class="btn ghost" data-act="lib">🖼 اختاري من الصور</button>')};
+['photoCam','photoLib'].forEach(id=>$(id).onchange=e=>photo(e.target.files[0],e.target));
+$('stockSearch').oninput=e=>{stockQ=e.target.value;renderStock()};
+addEventListener('pagehide',()=>stopVoice(false));
+
+let installEvt=null;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;renderHome()});
+addEventListener('appinstalled',()=>{installEvt=null;renderHome()});
+
+let lastDay=today();
+function tick(){if(today()!==lastDay){lastDay=today();prune();save();render();fillPlan()}}
+addEventListener('focus',tick);document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});setInterval(tick,60000);
+
+prune();save();render();
+if(key&&S.items.length)fillPlan();
+navigator.storage?.persist?.().catch(()=>{});
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
